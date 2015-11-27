@@ -1,0 +1,142 @@
+#reflectionEntry {
+    min-height: 20em;
+    width: 100%;
+}
+.phraseTags {
+    clear: right;
+    margin-bottom: 5px;
+}
+
+.phraseTags .label {
+    color: black;
+    font-style: normal;
+    font-family: Arial, sans-serif;
+}
+
+.stack {
+    float: left;
+    clear: right;
+    margin-bottom: 5px;
+}
+
+.sentence {
+    font-family: "Lucida Grande", "Helvetica Nueue", Arial, sans-serif;
+    font-size: 10pt;
+}
+.legend-text {
+    font-family: "Lucida Grande", "Helvetica Nueue", Arial, sans-serif;
+    font-size: 9pt;
+}
+
+.pie-text {
+    font-family: "Lucida Grande", "Helvetica Nueue", Arial, sans-serif;
+    font-size: 8pt;
+}
+
+.meta0 {
+    background-color: white;
+    color: darkcyan;
+}
+.meta1 {
+    background-color: lightgrey;
+    color: darkcyan;
+}
+.meta2 {
+    background-color: dimgrey;
+    color: lightcyan;
+}
+.meta3 {
+    background-color: black;
+    color: cyan;
+
+}
+
+/* Colours for phraseTags and metaTags */
+.none {
+    fill: lightgrey;
+    background-color: lightgrey;
+}
+
+.regulation {
+    fill: #0e7b5b;
+    background-color: #0e7b5b;
+
+}
+.knowledge {
+    fill: #21517c;
+    background-color: #21517c;
+}
+.experience {
+    fill: #8f0625;
+    background-color: #8f0625;
+}
+
+
+.selfReflexive {
+    background: paleturquoise;
+    fill: paleturquoise;
+}
+.groupReflexive {
+    background: lightseagreen;
+    fill: lightseagreen;
+}
+.selfPossessive {
+    background: skyblue;
+    fill: skyblue;
+}
+.groupPossessive {
+    background: deepskyblue;
+    fill: deepskyblue;
+}
+.othersPossessive {
+    background: dodgerblue;
+    fill: dodgerblue;
+}
+
+
+
+.temporal {
+    background: lightgreen;
+    fill: lightgreen;
+}
+.anticipate {
+    background: limegreen;
+    fill: limegreen;
+}
+.possible {
+    background: darkseagreen;
+    fill: darkseagreen;
+}
+.definite {
+    background: mediumseagreen;
+    fill: mediumseagreen;
+}
+.outcome {
+    background: forestgreen;
+    fill: forestgreen;
+}
+
+
+.pertains {
+    background: palegoldenrod;
+    fill: palegoldenrod;
+}
+.consider {
+    background: goldenrod;
+    fill: goldenrod;
+}
+.compare {
+    background: darkgoldenrod;
+    fill: darkgoldenrod;
+}
+
+.manner {
+    background: pink;
+    fill: pink;
+}
+.emotive {
+    background: violet;
+    fill: violet;
+}
+
+

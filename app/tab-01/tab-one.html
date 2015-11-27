@@ -1,0 +1,141 @@
+<div ng-controller="tabOneCtrl">
+    <div class="container">
+        <div class = "row" ng-hide="analysed">
+            <div class="col-md-12">
+                <p>This tool analyses reflective writing for key reflective phrases and categorises them for aspects of metagocognitive process.</p>
+                <ol>
+                    <li>Use the down arrow on the <em>Analyse</em> button to select an example reflection <b>OR</b> type or paste your own reflection into the text box</li>
+                    <li>Click <b>Analyse</b></li>
+                </ol>
+                <div ng-show="!analysed" class="btn-group" uib-dropdown on-toggle="toggled(open)">
+                    <button type="button" class="btn btn-default" ng-click="analyseReflection()">Analyse</button>
+                    <button type="button" class="btn btn-default" uib-dropdown-toggle id="simple-dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="uib-dropdown-menu" aria-labelledby="simple-dropdown">
+                        <li><a href="#" ng-click="addText('learning')">Learning reflection example</a></li>
+                        <li><a href="#" ng-click="addText('learning2')">Learning reflection short example</a></li>
+                        <li><a href="#" ng-click="addText('personal')">Personal reflection example</a></li>
+                        <li><a href="#" ng-click="addText('personal2')">Personal reflection short example</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#" ng-click="addText('descriptive')">Descriptive (not reflection)</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#" ng-click="clearText()">Clear text</a></li>
+                    </ul>
+                </div>
+                <div>&nbsp;</div>
+                <textarea id="reflectionEntry" data-ng-model="reflection.text"></textarea>
+            </div>
+        </div>
+        <div class="row" ng-show="analysed" ng-init="isCollapsed=false">
+            <button type="button" class="close" ng-click="isCollapsed = !isCollapsed">
+                <span ng-hide="isCollapsed">&times;&nbsp;</span>
+                <span ng-show="isCollapsed">&lt;&nbsp;</span>
+            </button>
+            <div uib-collapse="isCollapsed">
+                <div class="col-md-1">
+                    <div  class="btn btn-default" ng-click="reset()">Edit text</div>
+                </div>
+                <div class="col-md-5">
+                    <div class="well well-sm">
+                        <ul>
+                            <li class="small">To load new text and re-run the analysis, click the <b>Edit text</b> button</li>
+                            <li class="small">Darker sentence numbers indicate sentences with more evidence of metacognition</li>
+                            <li class="small">Possible phrase tags are shown on the right. For more detail on these tags, see the <b>About</b> tab</li>
+                            <li class="small">Under the summary table (below right), the first chart indicates relative frequency of metacognitive tags, the second shows the relative frequency of phrase tags.</li>
+                            <li class="small">You can close this section by clicking the cross on the right, and reopen it by clicking the arrow that appears in it's place.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div>
+                        <b class="small">Phrase Tags:</b>
+                        <div class="phraseTags">
+                            <span class="label selfReflexive">selfReflexive</span>
+                            <span class="label groupReflexive">groupReflexive</span>
+                            <span class="label selfPossessive">selfPossessive</span>
+                            <span class="label groupPossessive">groupPossessive</span>
+                            <span class="label othersPossessive">othersPossessive</span>
+                        </div>
+                        <div class="phraseTags">
+                            <span class="label temporal">temporal</span>
+                            <span class="label anticipate">anticipate</span>
+                            <span class="label possible">possible</span>
+                            <span class="label definite">definite</span>
+                            <span class="label outcome">outcome</span>
+                        </div>
+                        <div class="phraseTags">
+                            <span class="label pertains">pertains</span>
+                            <span class="label consider">consider</span>
+                            <span class="label compare">compare</span>
+                        </div>
+                        <div class="phraseTags">
+                            <span class="label emotive">emotive</span>
+                            <span class="label manner">manner</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">&nbsp;</div>
+            </div>
+        </div>
+        <div class="row" ng-show="analysed"><div class="col-md-12">
+            <p class="small" ng-show="reflection.source!=''"><b>SOURCE:&nbsp;</b>{{reflection.source}} - <a href="{{reflection.url}}">{{reflection.url}}</a></p>
+        </div></div>
+        <div class="row">
+            <div class="col-md-8">
+                <div ng-show="analysed" class="table-sroll">
+                      <table class="table table-responsive table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="col1">No.</th><th class="col2">Sentence</th><th class="col3">Tags</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="tag in analysis.tags">
+                            <td class="col1"><button type="button" ng-class="'meta'+tag.metaTags.length+' btn btn-sm'">{{$index}}</button></td>
+                            <td class="col2"><div class="sentence" ng-bind-html="markupSentence(tag)"></div></td>
+                            <td class="col3"><div ng-show="tag.metaTags.length >0" class="tags">
+                                <div ng-repeat="name in tag.metaTags" ng-class="name+' label stack'">{{name}}</div></div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-show="analysis.tags.length > 15">
+                    <hr />
+                    <p><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>&nbsp;Scroll down for more&nbsp;</p></div>
+            </div>
+            <div class="col-md-4">
+                <div ng-show="analysed">
+                    <table class="table table-responsive table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Summary</th><th>&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr><td>Timestamp</td><td>{{analysis.counts.timestamp | date:'medium'}}</td></tr>
+                        <tr><td>Words</td><td>{{analysis.counts.wordCount}}</td></tr>
+                        <tr><td>Avg Word Length</td><td>{{analysis.counts.avgWordLength | number: 2}} chars</td></tr>
+                        <tr><td>Sentences</td><td>{{analysis.counts.sentenceCount}}</td></tr>
+                        <tr><td>Avg Sentence Length</td><td>{{analysis.counts.avgSentenceLength | number: 2}} words</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="charts">
+                    <chart-pie ng-show="analysed" chartdata="{{analysis.summary.metaTagSummary}}"></chart-pie>
+                    <chart-pie ng-show="analysed" chartdata="{{analysis.summary.phraseTagSummary}}"></chart-pie>
+                </div>
+
+                <div ng-show="analysed">
+                    <hr />
+                    <p><input type="checkbox" ng-model="checked" aria-label="Toggle ngHide">&nbsp;show details: </p>
+                        <div class="check-element animate-show" ng-show="checked">
+                            <p class="small">{{analysis | json}}</p>
+                        </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

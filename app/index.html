@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright 2015 Andrew Gibson http://andrewresearch.html/
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  -->
+
+<html lang="en" ng-app="AlasiUI">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Reflective Writing Analytics Tools">
+    <meta name="author" content="Andrew Gibson">
+    
+    <title>Alasi 15 - Reflective Writing Analytics</title>
+    
+    <link rel="stylesheet" type="text/css" href="lib/css/bootstrap.min.css"/>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">-->
+    <link rel="stylesheet" type="text/css" href="app.css"/>
+    <link rel="stylesheet" type="text/css" href="tab-00/tab-home.css"/>
+    <link rel="stylesheet" type="text/css" href="tab-01/tab-one.css"/>
+    <link rel="stylesheet" type="text/css" href="tab-02/tab-two.css"/>
+    <link rel="icon" href="/img/favicon.ico">
+</head>
+    
+<body ng-controller="MainCtrl">
+    
+    <div class="container">
+
+      <div class="masthead ng-cloak">
+        <h3 class="text-muted">{{title}}</h3>
+          <!--
+        <nav>
+          <ul class="nav nav-justified">
+            <li class="active"><a href="#">Projects</a></li>
+            <li><a href="#">People</a></li>
+            <li><a href="#">Tech Info</a></li>
+          </ul>
+        </nav> -->
+      </div>
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div ng-controller="MainTabs">
+                      <uib-tabset>
+                        <uib-tab heading="About">
+                            <div class="tabpanel">
+                                <tab-home></tab-home>
+                            </div>
+                        </uib-tab>
+                          <uib-tab heading="Reflective Phrase Analysis">
+                            <div class="tabpanel">
+                                <tab-one></tab-one>
+                              </div>
+                          </uib-tab>
+                          <uib-tab heading="Technical information">
+                              <div class="tabpanel">
+                                  <tab-two></tab-two>
+                              </div>
+                          </uib-tab>
+                      </uib-tabset>
+                </div>
+            </div>
+        </div>
+    <!-- Site footer -->
+      <footer class="footer">
+        <p>&copy; Andrew Gibson 2015</p>
+      </footer>
+    </div> <!-- /container -->
+
+    <!-- Library Scripts -->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>-->
+    <script src="lib/js/angular.min.js"></script>
+    <script src="lib/js/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script src="lib/js/d3.min.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="app.js"></script>
+    <script src="app-controller.js"></script>
+    <script src="tab-00/tab-home-directive.js"></script>
+    <script src="tab-00/tab-home-controller.js"></script>
+    <script src="tab-01/tab-one-directive.js"></script>
+    <script src="tab-01/tab-one-controller.js"></script>
+    <script src="tab-02/tab-two-directive.js"></script>
+    <script src="tab-02/tab-two-controller.js"></script>
+
+    <script src="components/chart-pie/chart-pie-directive.js"></script>
+
+</body>
+</html>
